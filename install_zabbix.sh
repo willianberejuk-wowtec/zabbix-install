@@ -105,9 +105,7 @@ else
 
     wget -O /tmp/instalar_videosoft_usb_monitor.sh "$USB_MONITOR_URL"
 
-    sudo chmod +x /tmp/instalar_videosoft_usb_monitor.sh
-
-    sudo /tmp/instalar_videosoft_usb_monitor.sh
+    sudo bash /tmp/instalar_videosoft_usb_monitor.sh
 
     echo ""
     echo "====================================="
