@@ -98,7 +98,7 @@ echo ""
 echo "[9/9] Verificando USB Monitor Videosoft..."
 echo ""
 
-if [ -f /usr/local/bin/videosoft_usb_monitor.sh ]; then
+if [ -f /etc/videosoft_usb_monitor_installed ]; then
     echo "USB Monitor ja instalado. Pulando instalacao..."
 else
     echo "Instalando USB Monitor..."
@@ -106,6 +106,8 @@ else
     wget -O /tmp/instalar_videosoft_usb_monitor.sh "$USB_MONITOR_URL"
 
     sudo bash /tmp/instalar_videosoft_usb_monitor.sh
+
+    sudo touch /etc/videosoft_usb_monitor_installed
 
     echo ""
     echo "====================================="
