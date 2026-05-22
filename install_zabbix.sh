@@ -23,7 +23,7 @@ echo "[3/8] Ajustando arquitetura do repositorio..."
 # Limpar e recriar o arquivo zabbix.list com a arquitetura correta
 cat > /etc/apt/sources.list.d/zabbix.list << 'EOF'
 deb [arch=amd64] http://repo.zabbix.com/zabbix/7.0/ubuntu jammy main
-deb-src [arch=amd64] http://repo.zabbix.com/zabbix/7.0/ubuntu jammy main
+deb-src http://repo.zabbix.com/zabbix/7.0/ubuntu jammy main
 EOF
 
 echo "[4/8] Atualizando repositorios..."
