@@ -47,5 +47,6 @@ echo ""
 echo "====================================="
 echo " ZABBIX INSTALADO COM SUCESSO"
 echo "====================================="
+echo ""
 
 systemctl status zabbix-agent --no-pager
