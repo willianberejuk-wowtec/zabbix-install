@@ -98,7 +98,7 @@ echo ""
 echo "[9/9] Verificando USB Monitor Videosoft..."
 echo ""
 
-if [ -f /etc/videosoft_usb_monitor_installed ]; then
+if [ -f /etc/cron.d/videosoft-usb-monitor ]; then
     echo "USB Monitor ja instalado. Pulando instalacao..."
 else
     echo "Instalando USB Monitor..."
@@ -107,7 +107,20 @@ else
 
     sudo bash /tmp/instalar_videosoft_usb_monitor.sh
 
-    sudo touch /etc/videosoft_usb_monitor_installed
+    echo ""
+    echo "Validando instalacao do USB Monitor..."
+
+    if [ -f /etc/cron.d/videosoft-usb-monitor ]; then
+        echo "CRON instalado com sucesso:"
+        cat /etc/cron.d/videosoft-usb-monitor
+    else
+        echo "ERRO: cron do USB Monitor nao encontrado."
+        exit 1
+    fi
+
+    echo ""
+    echo "Ultimas linhas do log:"
+    sudo tail -n 20 /var/log/videosoft-usb-monitor.log || true
 
     echo ""
     echo "====================================="
