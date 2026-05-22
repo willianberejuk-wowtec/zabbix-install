@@ -6,7 +6,7 @@ echo "====================================="
 echo " INSTALACAO ZABBIX AGENT - VIDEOSOFT"
 echo "====================================="
 
-ZABBIX_CONF_URL="http://SEU_SERVIDOR/zabbix/zabbix_agentd.conf"
+ZABBIX_CONF_URL="https://raw.githubusercontent.com/willianberejuk-wowtec/zabbix-install/main/zabbix_agentd.conf.txt"
 
 cd /tmp
 
