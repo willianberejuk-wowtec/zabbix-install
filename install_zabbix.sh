@@ -6,7 +6,7 @@ echo "====================================="
 echo " INSTALACAO ZABBIX AGENT - VIDEOSOFT"
 echo "====================================="
 
-ZABBIX_CONF_URL="https://raw.githubusercontent.com/willianberejuk-wowtec/zabbix-install/main/zabbix_agentd.conf"
+ZABBIX_CONF_URL="https://raw.githubusercontent.com/willianberejuk-wowtec/zabbix-install/main/zabbix_agentd.conf.txt"
 
 cd /tmp
 
@@ -24,7 +24,7 @@ sed -i 's/^deb /deb [arch=amd64] /g' /etc/apt/sources.list.d/zabbix.list
 
 echo "[4/8] Atualizando repositorios..."
 
-apt update -y
+apt update
 
 echo "[5/8] Removendo instalacoes antigas..."
 
