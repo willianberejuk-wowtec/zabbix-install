@@ -98,12 +98,6 @@ echo ""
 
 rm -f /tmp/instalar_videosoft_usb_monitor.sh
 
-echo "Limpando cache GEO..."
-
-sudo rm -rf /opt/videosoft/geo/geo.cache
-
-echo "Cache GEO removido."
-
 echo "Baixando instalador do USB Monitor..."
 
 wget -q -O /tmp/instalar_videosoft_usb_monitor.sh "$USB_MONITOR_URL"
@@ -114,6 +108,12 @@ if [ ! -f /tmp/instalar_videosoft_usb_monitor.sh ]; then
 fi
 
 chmod +x /tmp/instalar_videosoft_usb_monitor.sh
+
+echo "Limpando cache GEO..."
+
+sudo rm -rf /opt/videosoft/geo/geo.cache
+
+echo "Cache GEO removido."
 
 echo "Executando instalador..."
 
