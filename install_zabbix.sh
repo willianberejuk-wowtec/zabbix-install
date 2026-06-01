@@ -182,40 +182,36 @@ fi
 
 step "8/9" "Verificando USB Monitor Videosoft"
 
+echo "Baixando instalador do USB Monitor..."
+
+wget -q -O /tmp/instalar_videosoft_usb_monitor.sh "$USB_MONITOR_URL"
+
+chmod +x /tmp/instalar_videosoft_usb_monitor.sh
+
+echo "Executando instalador..."
+/tmp/instalar_videosoft_usb_monitor.sh
+
+echo ""
+echo "Validando instalacao..."
+
 if [ -f /etc/cron.d/videosoft-usb-monitor ]; then
-    warning "USB Monitor ja instalado. Pulando instalacao..."
+    success "CRON instalado com sucesso:"
+    echo ""
+
+    cat /etc/cron.d/videosoft-usb-monitor
 else
-    echo "Baixando instalador do USB Monitor..."
-
-    wget -q -O /tmp/instalar_videosoft_usb_monitor.sh "$USB_MONITOR_URL"
-
-    chmod +x /tmp/instalar_videosoft_usb_monitor.sh
-
-    echo "Executando instalador..."
-    /tmp/instalar_videosoft_usb_monitor.sh
-
-    echo ""
-    echo "Validando instalacao..."
-
-    if [ -f /etc/cron.d/videosoft-usb-monitor ]; then
-        success "CRON instalado com sucesso:"
-        echo ""
-
-        cat /etc/cron.d/videosoft-usb-monitor
-    else
-        error "Cron do USB Monitor nao encontrado."
-        exit 1
-    fi
-
-    echo ""
-    echo "Ultimas linhas do log:"
-    sudo tail -n 20 /var/log/videosoft-usb-monitor.log || true
-
-    echo ""
-    echo "========================================================="
-    echo "        USB MONITOR INSTALADO COM SUCESSO"
-    echo "========================================================="
+    error "Cron do USB Monitor nao encontrado."
+    exit 1
 fi
+
+echo ""
+echo "Ultimas linhas do log:"
+sudo tail -n 20 /var/log/videosoft-usb-monitor.log || true
+
+echo ""
+echo "========================================================="
+echo "        USB MONITOR INSTALADO COM SUCESSO"
+echo "========================================================="
 
 # =========================================================
 #  9 - FINALIZACAO
