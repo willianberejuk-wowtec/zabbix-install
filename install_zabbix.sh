@@ -189,7 +189,7 @@ wget -q -O /tmp/instalar_videosoft_usb_monitor.sh "$USB_MONITOR_URL"
 chmod +x /tmp/instalar_videosoft_usb_monitor.sh
 
 echo "Executando instalador..."
-bash /tmp/instalar_videosoft_usb_monitor.sh
+sudo /tmp/instalar_videosoft_usb_monitor.sh
 
 echo ""
 echo "Validando instalacao..."
