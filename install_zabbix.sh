@@ -34,10 +34,6 @@ deb [arch=amd64] http://repo.zabbix.com/zabbix/7.0/ubuntu jammy main
 deb-src http://repo.zabbix.com/zabbix/7.0/ubuntu jammy main
 EOF
 
-echo "[3/9] Atualizando repositorios..."
-
-sudo apt update
-
 echo "[4/9] Verificando instalacao do Zabbix Agent..."
 
 if dpkg -l | grep -q zabbix-agent; then
