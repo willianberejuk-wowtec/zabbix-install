@@ -11,6 +11,27 @@ USB_MONITOR_URL="http://noc-totens.videosoft.com.br/instalar_videosoft_usb_monit
 
 ZABBIX_CONF="/etc/zabbix/zabbix_agentd.conf"
 
+echo "[0/9] Detectando versao do Ubuntu..."
+
+source /etc/os-release
+
+case "$VERSION_CODENAME" in
+    jammy)
+        ZABBIX_RELEASE="zabbix-release_7.0-2+ubuntu22.04_all.deb"
+        ZABBIX_REPO="jammy"
+        ;;
+    focal)
+        ZABBIX_RELEASE="zabbix-release_7.0-2+ubuntu20.04_all.deb"
+        ZABBIX_REPO="focal"
+        ;;
+    *)
+        echo "ERRO: Distribuicao nao suportada: $VERSION_CODENAME"
+        exit 1
+        ;;
+esac
+
+echo "Ubuntu detectado: $PRETTY_NAME"
+
 cd /tmp
 
 echo "[1/9] Verificando repositorio Zabbix..."
@@ -20,19 +41,23 @@ if dpkg -l | grep -q zabbix-release; then
 else
     echo "Baixando repositorio Zabbix..."
 
-    wget -q https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu22.04_all.deb
+    wget -q "https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/${ZABBIX_RELEASE}"
 
     echo "Instalando repositorio Zabbix..."
 
-    sudo dpkg -i zabbix-release_7.0-2+ubuntu22.04_all.deb
+    sudo dpkg -i "${ZABBIX_RELEASE}"
 fi
 
 echo "[2/9] Ajustando repositorio..."
 
-cat > /etc/apt/sources.list.d/zabbix.list << 'EOF'
-deb [arch=amd64] http://repo.zabbix.com/zabbix/7.0/ubuntu jammy main
-deb-src http://repo.zabbix.com/zabbix/7.0/ubuntu jammy main
+sudo tee /etc/apt/sources.list.d/zabbix.list > /dev/null << EOF
+deb [arch=amd64] http://repo.zabbix.com/zabbix/7.0/ubuntu ${ZABBIX_REPO} main
+deb-src http://repo.zabbix.com/zabbix/7.0/ubuntu ${ZABBIX_REPO} main
 EOF
+
+echo "[3/9] Atualizando repositorios..."
+
+sudo apt update
 
 echo "[4/9] Verificando instalacao do Zabbix Agent..."
 
